@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 using UnityEngine.WSA;
 
@@ -15,7 +16,13 @@ public class BallController : MonoBehaviour
     [SerializeField]
     private float maxSpeed = 12f;
 
+    // 득점 후 다음 공이 발사되기까지 기다리는 시간
+    [SerializeField]
+    private float serveDelay = 1f;
+
     private Rigidbody2D body;
+
+    private Coroutine serveCoroutine;
 
     private void Awake()
     {
@@ -25,14 +32,52 @@ public class BallController : MonoBehaviour
     private void Start()
     {
         // 게임 시작과 동시에 공을 오른쪽으로 발사한다
-        Launch(Vector2.right);
+        Serve(Vector2.right);
     }
 
     // 공 발사
-    private void Launch(Vector2 direction)
+    private void Serve(Vector2 direction)
     {
-        // direction을 단위벡터로 만들고 처음 속도 곱한다
+        // 공을 중앙으로 이동
+        body.position = Vector2.zero;
+
+        // 혹시 이전에 가지고 있던 속도가 있다면 제거
+        body.linearVelocity = Vector2.zero;
+
+        // 공의 회전도 제거
+        body.angularVelocity = 0f;
+
+        // 지정된 방향으로 발사
         body.linearVelocity = direction.normalized * initialSpeed;
+    }
+
+    public void ResetAndServe(Vector2 direction)
+    {
+        // 이미 재시작 코루틴이 실행 중이라면 중복 실행하지 않는다
+        if(serveCoroutine != null)
+        {
+            StopCoroutine(serveCoroutine);
+        }
+
+        serveCoroutine = StartCoroutine(ResetAndServeRoutine(direction));
+    }
+
+    private IEnumerator ResetAndServeRoutine(Vector2 direction)
+    {
+        // 공을 즉시 정지
+        body.linearVelocity = Vector2.zero;
+
+        // 중앙으로 이동
+        body.position = Vector2.zero;
+
+        // 1초 기다린다
+        yield return new WaitForSeconds(serveDelay);
+
+        // 다시 발사
+        Serve(direction);
+
+        // 코루틴이 끝났다는 것을 표시 -> 
+        serveCoroutine = null;
     }
 
     // 충돌 처리

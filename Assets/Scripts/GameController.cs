@@ -1,4 +1,6 @@
 using UnityEngine;
+using TMPro;
+
 
 public class GameController : MonoBehaviour
 {
@@ -8,25 +10,39 @@ public class GameController : MonoBehaviour
     // 오른쪽 플레이어의 점수
     private int rightScore;
 
+    // 화면에 표시할 왼쪽 점수
+    [SerializeField]
+    private TMP_Text leftScoreText;
+
+    // 화면에 표시할 오른쪽 점수
+    [SerializeField]
+    private TMP_Text rightScoreText;
+
     private void Start()
     {
         leftScore = 0;
         rightScore = 0;
 
-        Debug.Log("Pong Game Start!");
+        UpdateScoreUI();
     }
 
     public void AddLeftScore()
     {
         leftScore++;
-
-        Debug.Log($"Score: {leftScore} : {rightScore}");
+        UpdateScoreUI();
     }
 
     public void AddRightScore()
     {
         rightScore++;
+        UpdateScoreUI();
 
-        Debug.Log($"Score: {leftScore} : {rightScore}");
+    }
+
+    // 현재 점수를 UI에 반영
+    private void UpdateScoreUI()
+    {
+        leftScoreText.text = leftScore.ToString();
+        rightScoreText.text = rightScore.ToString();
     }
 }
