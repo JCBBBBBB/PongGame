@@ -35,7 +35,7 @@ public class BallController : MonoBehaviour
         Serve(Vector2.right);
     }
 
-    // 공 발사
+    // 공 초기화 및 발사
     private void Serve(Vector2 direction)
     {
         // 공을 중앙으로 이동
