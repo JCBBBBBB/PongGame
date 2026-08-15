@@ -27,7 +27,13 @@ public class GoalController : MonoBehaviour
         if(side == GoalSide.Left)
         {
             // 오른쪽 플레이어 득점
-            game.AddRightScore();
+            bool gameOver = game.AddRightScore();
+
+            // 게임이 끝났으면 공 다시 발사하지 않는다.
+            if (gameOver)
+            {
+                return;
+            }
 
             // 다음 공은 오른쪽 플레이어한테(이긴 사람)
             ball.ResetAndServe(Vector2.right);
@@ -35,7 +41,12 @@ public class GoalController : MonoBehaviour
         else
         {
             // 왼쪽 플레이어 득점
-            game.AddLeftScore();
+            bool gameOver = game.AddLeftScore();
+
+            if(gameOver)
+            {
+                return;
+            }
 
             // 다음 공은 왼쪽 플레이어한테(이긴 사람)
             ball.ResetAndServe(Vector2.left);

@@ -149,6 +149,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GameController
   scoreToWin: 5
+  ball: {fileID: 1036086527}
   leftScoreText: {fileID: 174642494}
   rightScoreText: {fileID: 1189262397}
   messageText: {fileID: 1640949249}

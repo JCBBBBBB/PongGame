@@ -19,6 +19,9 @@ public class GameController : MonoBehaviour
     [SerializeField]
     private int scoreToWin = 5;
 
+    [SerializeField]
+    private BallController ball;
+
 
     // 왼쪽 플레이어의 점수
     private int leftScore;
@@ -51,18 +54,30 @@ public class GameController : MonoBehaviour
         Invoke(nameof(StartGame), 1f);
     }
 
+    private void Update()
+    {
+        if (gameState == GameState.GameOver && Input.GetKeyDown(KeyCode.R))
+        {
+            Restart();
+        }
+
+    }
+
     private void StartGame()
     {
         gameState = GameState.Playing;
 
         messageText.text = "";
+
+        // 게임 시작 시 공을 발사한다.
+        ball.ResetAndServe(Vector2.right);
     }
 
-    public void AddLeftScore()
+    public bool AddLeftScore()
     {
         if(gameState != GameState.Playing)
         {
-            return;
+            return false;
         }
 
         leftScore++;
@@ -72,14 +87,17 @@ public class GameController : MonoBehaviour
         if(leftScore >= scoreToWin)
         {
             EndGame();
+            return true;
         }
+
+        return false;
     }
 
-    public void AddRightScore()
+    public bool AddRightScore()
     {
         if(gameState != GameState.Playing)
         {
-            return;
+            return false;
         }
 
         rightScore++;
@@ -89,7 +107,10 @@ public class GameController : MonoBehaviour
         if(rightScore >= scoreToWin)
         {
             EndGame();
+            return true; // 게임 끝남
         }
+
+        return false; // 게임 아직 계속된다
     }
 
     // 현재 점수를 UI에 반영
@@ -111,5 +132,21 @@ public class GameController : MonoBehaviour
         {
             messageText.text = "RIGHT PLAYER WINS";
         }
+    }
+
+    private void Restart()
+    {
+        leftScore = 0;
+        rightScore = 0;
+
+        UpdateScoreUI();
+
+        gameState = GameState.Ready;
+
+        messageText.text = "READY";
+
+        ball.Stop();
+
+        Invoke(nameof(StartGame), 1f);
     }
 }

@@ -138,4 +138,13 @@ public class BallController : MonoBehaviour
         // Rigidbody2D에 적용한다
         body.linearVelocity = direction.normalized * newSpeed;
     }
+
+    public void Stop()
+    {
+        // 공의 이동을 멈춘다.
+        body.linearVelocity = Vector2.zero;
+
+        // 공의 회전도 멈춘다
+        body.angularVelocity = 0f;
+    }
 }
