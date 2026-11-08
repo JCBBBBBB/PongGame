@@ -16,10 +16,10 @@ public class PaddleMotor : MonoBehaviour
     private float moveSpeed = 8f; // 이동 속도
 
     [SerializeField]
-    private float minY = -4.5f; // 패들 움직일 수 있는 y 범위
+    private float minY = -6f; // 패들 움직일 수 있는 y 범위
 
     [SerializeField]
-    private float maxY = 4.5f;
+    private float maxY = 3.3f;
 
     private Rigidbody2D body;
     private BoxCollider2D boxCollider;

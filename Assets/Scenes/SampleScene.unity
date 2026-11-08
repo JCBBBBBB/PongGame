@@ -1196,7 +1196,7 @@ Transform:
   m_GameObject: {fileID: 1232596164}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 7.5, y: 0, z: 0}
+  m_LocalPosition: {x: 7.5, y: -1, z: 0}
   m_LocalScale: {x: 0.25, y: 2, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1215,8 +1215,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PaddleMotor
   moveSpeed: 8
-  minY: -4.5
-  maxY: 4.5
+  minY: -6
+  maxY: 3.3
 --- !u!114 &1232596170
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1596,7 +1596,7 @@ Transform:
   m_GameObject: {fileID: 1688369734}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -7.5, y: 0, z: 0}
+  m_LocalPosition: {x: -7.5, y: -1, z: 0}
   m_LocalScale: {x: 0.25, y: 2, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1688,8 +1688,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PaddleMotor
   moveSpeed: 8
-  minY: -4.5
-  maxY: 4.5
+  minY: -6
+  maxY: 3.3
 --- !u!114 &1688369740
 MonoBehaviour:
   m_ObjectHideFlags: 0
